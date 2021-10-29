@@ -1,14 +1,16 @@
 <template>
+  <Header/>
   <main>
-    <Header/>
     <router-view/>
   </main>
+  <Footer/>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
 export default {
-  components: { Header }
+  components: { Header, Footer }
 }
 </script>
 
@@ -27,9 +29,9 @@ main{
   width: 95%;
   max-width: 960px;
   margin: 0 auto;
+  min-height: calc(100vh - 100px);
 }
 a{
   text-decoration: none;
-
 }
 </style>

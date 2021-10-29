@@ -48,7 +48,10 @@ export default {
 
 <style scoped>
 header{
-  height: 40px;
+  height: 50px;
+  width: 95%;
+  max-width: 960px;
+  margin: 0 auto;
 }
 header>div{
   height: 100%;
