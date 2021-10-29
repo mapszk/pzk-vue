@@ -1,11 +1,35 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/projects">projects</router-link> |
-    <router-link to="/contact">contact</router-link>
-  </div>
-  <router-view/>
+  <main>
+    <Header/>
+    <router-view/>
+  </main>
 </template>
 
+<script>
+import Header from '@/components/Header.vue'
+export default {
+  components: { Header }
+}
+</script>
+
 <style>
+*, *::after, *::before{
+  box-sizing: border-box;
+}
+body{
+  margin: 0;
+  padding: 0;
+}
+section{
+  padding: 2.5rem 0;
+}
+main{
+  width: 95%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+a{
+  text-decoration: none;
+
+}
 </style>
