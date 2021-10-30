@@ -128,7 +128,6 @@ img {
   grid-template-rows: repeat(4, 1fr);
   justify-content: center;
   align-items: center;
-  animation: 3s fallAnim;
 }
 
 .heroText {
@@ -138,7 +137,6 @@ img {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  animation: 2s fallAnim;
   color: #052b36;
 }
 h2{
@@ -183,10 +181,6 @@ h2{
 @keyframes floatFigura {
   0% {transform: translateY(0)}
   0% {transform: translateY(20px)}
-}
-@keyframes fallAnim {
-  0% {transform: translateY(-3rem); opacity: 0;}
-  100% {transform: translateY(0); opacity: 1;}
 }
 
 </style>

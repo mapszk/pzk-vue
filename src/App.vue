@@ -1,7 +1,9 @@
 <template>
   <Header/>
   <main>
-    <router-view/>
+    <transition name="slide" mode="out-in">
+      <router-view/>
+    </transition>
   </main>
   <Footer/>
 </template>
@@ -53,5 +55,14 @@ a{
 }
 button{
   font-family: "Epilogue", sans-serif;
+}
+
+/* route transition */
+.slide-enter-active, .slide-leave-active{
+  transition: opacity 1s ease, transform .6s ease;
+}
+.slide-enter-from, .slide-leave-to{
+  opacity: 0;
+  transform: translateY(-15%);
 }
 </style>
