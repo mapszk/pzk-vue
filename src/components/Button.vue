@@ -30,14 +30,10 @@
     :href="href"
     target="_blank"
     rel="noreferrer noopener"
+    :class="getStyles"
+    class="button"
   >
-    <button
-      class="button"
-      :class="getStyles"
-      :style="getMargin"
-    >
-      <slot></slot>
-    </button>
+    <slot></slot>
   </a>
 </template>
 
