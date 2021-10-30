@@ -21,6 +21,12 @@ export default {
 body{
   margin: 0;
   padding: 0;
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+}
+h1,h2,h3,h4,h5,h6, p{
+  margin: 0;
+  padding: 0;
 }
 section{
   padding: 2.5rem 0;
