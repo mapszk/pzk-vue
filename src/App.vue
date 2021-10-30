@@ -15,18 +15,27 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@200;400;600;800&display=swap');
+
 *, *::after, *::before{
   box-sizing: border-box;
 }
 body{
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: "Epilogue", sans-serif;
   background-color: #f0f0f0;
 }
 h1,h2,h3,h4,h5,h6, p{
   margin: 0;
   padding: 0;
+  color: #052b36;
+}
+h1, h2, h3, h4, h5, h6{
+  font-weight: 600;
+}
+p{
+  line-height: 1.4rem;
 }
 section{
   padding: 2.5rem 0;
@@ -39,5 +48,10 @@ main{
 }
 a{
   text-decoration: none;
+  color: #052b36;
+  font-family: "Epilogue", sans-serif;
+}
+button{
+  font-family: "Epilogue", sans-serif;
 }
 </style>

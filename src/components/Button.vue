@@ -91,6 +91,7 @@ a{
   margin-right: var(--mr);
   margin-left: var(--ml);
 
+  font-size: 15px;
   cursor: pointer;
   font-weight: 600;
   display: flex;

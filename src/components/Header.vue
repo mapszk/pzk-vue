@@ -52,6 +52,7 @@ header{
   width: 95%;
   max-width: 960px;
   margin: 0 auto;
+  font-weight: 600;
 }
 header>div{
   height: 100%;
@@ -76,6 +77,25 @@ nav{
 }
 nav>:not(:nth-child(1)){
   margin-left: 2rem;
+}
+nav>a{
+  position: relative;
+}
+nav>::after{
+  content: "";
+  height: 0.3rem;
+  background-color: #c8ff30;
+  width: 100%;
+  position: absolute;
+  bottom: -7px;
+  left: 0;
+  transform: scaleX(0);
+  transition: transform 0.6s ease;
+  transform-origin: left;
+  /* color: #c8ff30; */
+}
+nav>:hover::after{
+  transform: scaleX(1);
 }
 
 @media screen and (min-width: 720px){

@@ -141,8 +141,15 @@ img {
   animation: 2s fallAnim;
   color: #052b36;
 }
+h2{
+  font-size: 26px;
+  margin-bottom: 1rem;
+}
 
 @media screen and (min-width: 720px) {
+  h2{
+    font-size: 34px;
+  }
   #hero{
     display: flex;
     height: 500px;

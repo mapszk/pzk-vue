@@ -42,6 +42,6 @@ export default {
   width: 50%;
 }
 .grid-item>h5{
-  margin-top: .5rem;
+  margin-top: .7rem;
 }
 </style>
