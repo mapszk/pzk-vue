@@ -1,6 +1,8 @@
 <template>
   <!-- BUTTON -->
   <button
+    :type="type"
+    :disabled="disabled"
     class="button"
     :class="getStyles"
     :style="getMargin"
@@ -41,6 +43,8 @@
 export default {
   name: 'Button',
   props: {
+    type: { type: String },
+    disabled: { type: Boolean },
     link: { type: Boolean },
     href: { type: String },
     external: { type: Boolean },
@@ -99,6 +103,10 @@ a{
   /* padding: 0 2rem; */
   border-radius: 2.5rem;
   transition: transform .5s ease;
+}
+.button:disabled{
+  opacity: 0;
+  cursor: wait;
 }
 .button:hover{
   transform: translateY(-3px);
