@@ -6,9 +6,9 @@
         alt="Close menu"
       />
     </button>
-    <router-link @click="menu = !menu" to="/">Home</router-link>
-    <router-link @click="menu = !menu" to="/projects">Projects</router-link>
-    <router-link @click="menu = !menu" to="/contact">Contact</router-link>
+    <router-link @click="menuOff" to="/">Home</router-link>
+    <router-link @click="menuOff" to="/projects">Projects</router-link>
+    <router-link @click="menuOff" to="/contact">Contact</router-link>
   </div>
   <header>
     <div class="navbar_container">
