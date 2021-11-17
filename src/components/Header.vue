@@ -13,7 +13,7 @@
   <header>
     <div class="navbar_container">
       <router-link to="/">
-        <img class="logo" src="/images/logo-azul.svg" alt="PZK Logo" />
+        <div id="logo"></div>
       </router-link>
       <nav>
         <router-link to="/">Home</router-link>
@@ -31,8 +31,19 @@
 </template>
 
 <script>
+import Lottie from 'lottie-web'
 export default {
   name: 'Header',
+  mounted () {
+    const logoDiv = document.getElementById('logo')
+    Lottie.loadAnimation({
+      container: logoDiv,
+      path: '/animations/logo-completo.json',
+      renderer: 'svg',
+      loop: true,
+      autoplay: true
+    })
+  },
   data () {
     return {
       menu: false,
@@ -75,8 +86,8 @@ button > img {
   cursor: pointer;
   padding: 0;
 }
-.logo {
-  width: 75px;
+#logo {
+  width: 100px;
 }
 nav {
   display: none;
