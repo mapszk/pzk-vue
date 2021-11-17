@@ -1,26 +1,21 @@
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="validation">
     <h2>Contact</h2>
     <label for="name">Name</label>
-    <input v-model="name" type="text" id="name" name="name" />
+    <input v-model="name" type="text" id="name" name="name">
     <label for="email">Email</label>
-    <input v-model="email" type="text" id="email" name="email" />
+    <input v-model="email" type="text" id="email" name="email">
     <label for="message">Message</label>
-    <textarea
-      v-model="msg"
-      name="message"
-      id="message"
-      cols="30"
-      rows="10"
-    ></textarea>
+    <textarea v-model="message" name="message" id="message" cols="30" rows="10"></textarea>
     <Button type="submit" mt="1rem" color="secondary" :full="true">Send</Button>
-    <span :class="alertStyles">{{ alertMsg }}</span>
+    <transition name="slide">
+      <span v-if="alert" :class="alertStyles">{{alertMsg}}</span>
+    </transition>
   </form>
 </template>
 
 <script>
 import Button from '@/components/Button.vue'
-import { ref, computed } from 'vue'
 
 const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/g
 const endpoint = 'https://formspree.io/f/xdoyegpk'
@@ -28,110 +23,106 @@ const endpoint = 'https://formspree.io/f/xdoyegpk'
 export default {
   name: 'ContactForm',
   components: { Button },
-  setup () {
-    const name = ref('')
-    const email = ref('')
-    const msg = ref('')
-    const loading = ref(false)
-    const alert = ref(false)
-    const alertMsg = ref({})
-    const alertStyles = computed(() => {
-      return {
-        visible: alert.value,
-        error: alertMsg.value.type === 'error',
-        success: alertMsg.value.type === 'success'
-      }
-    })
-    const clearAlert = () => {
-      setTimeout(() => {
-        alert.value = false
-        alertMsg.value = {}
-      }, 5000)
+  data () {
+    return {
+      name: '',
+      email: '',
+      message: '',
+      alert: false,
+      alertType: '',
+      alertMsg: '',
+      loading: false
     }
-    const submit = async () => {
-      loading.value = true
+  },
+  computed: {
+    alertStyles () {
+      return {
+        error: this.alertType === 'error',
+        success: this.alertType === 'success'
+      }
+    }
+  },
+  methods: {
+    clearAlert () {
+      setTimeout(() => {
+        this.alert = false
+        this.alertType = ''
+        this.alertMsg = ''
+      }, 5000)
+    },
+    async submit () {
+      this.loading = true
       await fetch(endpoint, {
         method: 'POST',
-        body: JSON.stringify({
-          name: this.name,
-          email: this.email,
-          message: this.message
-        }),
+        body: JSON.stringify({ name: this.name, email: this.email, message: this.message }),
         headers: {
           Accept: 'application/json'
         }
       })
         .then(() => {
-          alert.value = true
-          alertMsg.value = { type: 'success', msg: 'Sent! Thank you' }
+          this.alert = true
+          this.alertType = 'success'
+          this.alertMsg = 'Sent! Thank you'
         })
         .catch(() => {
-          alert.value = true
-          alertMsg.value = { type: 'error', msg: 'An error has ocurred, please try again' }
+          this.alert = true
+          this.alertType = 'error'
+          this.alertMsg = 'An error has ocurred, please try again'
         })
         .finally(() => {
-          loading.value = false
-          clearAlert()
+          this.loading = false
+          this.clearAlert()
         })
-    }
-    const validation = () => {
-      if (!email.value | !name.value | !msg.value) {
-        alert.value = true
-        alertMsg.value = { type: 'error', msg: 'Please fill all the fields' }
-        return clearAlert()
+    },
+    validation () {
+      if (!this.email | !this.name | !this.message) {
+        this.alert = true
+        this.alertType = 'error'
+        this.alertMsg = 'Please fill all the fields'
+        return this.clearAlert()
       } else if (!emailRegex.test(this.email)) {
-        alert.value = true
-        alertMsg.value = { type: 'error', msg: 'Please put a valid email' }
-        return clearAlert()
+        this.alert = true
+        this.alertType = 'error'
+        this.alertMsg = 'Please put a valid email'
+        return this.clearAlert()
       } else {
-        submit()
+        this.submit()
       }
-    }
-
-    return {
-      name,
-      email,
-      msg,
-      validation,
-      loading,
-      alertStyles
     }
   }
 }
 </script>
 
 <style scoped>
-h2 {
+h2{
   color: #c8ff30;
-  margin-bottom: 0.5rem;
+  margin-bottom: .5rem;
 }
-label {
+label{
   display: block;
-  margin-bottom: 0.3rem;
+  margin-bottom: .3rem;
   color: #c8ff30;
 }
-input,
-textarea {
+input, textarea{
   display: block;
   width: 100%;
   height: 2.5rem;
   border-radius: 2rem;
   border: none;
   padding: 0 1rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: .6rem;
 }
-input:focus,
-textarea:focus {
+input:focus, textarea:focus{
   border: 2px solid #c8ff30;
   outline: none;
 }
-textarea {
+textarea{
   border-radius: 1rem;
   height: 10rem;
   resize: none;
-  padding: 0.8rem;
+  padding: .8rem;
 }
-form {
+form{
   background-color: #052b36;
   padding: 1rem;
   border-radius: 1rem;
@@ -139,23 +130,16 @@ form {
 }
 
 /* alert */
-span {
+span{
   font-weight: 600;
   position: absolute;
   text-align: center;
-  padding: 0.75rem;
+  padding: .75rem;
   left: 0;
   right: 0;
   margin-top: 1.5rem;
   border-radius: 2rem;
   display: block;
-  transition: transform 1s ease, opacity 1s ease;
-  transform: translateY(20px);
-  opacity: 0;
-}
-.visible {
-  transform: translateY(0);
-  opacity: 1;
 }
 .error {
   background-color: red;
@@ -164,5 +148,12 @@ span {
 .success {
   background-color: #c8ff30;
   color: #052b36;
+}
+.slide-enter-active, .slide-leave-active {
+  transition: opacity 1s, transform .5s;
+}
+.slide-enter, .slide-leave-to {
+  opacity: 0;
+  transform: translateY(10px)
 }
 </style>
