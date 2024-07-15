@@ -20,7 +20,7 @@
       <div class="heroText">
         <h2>
           Hi! I'm Martín Pilaszek, <br />
-          and I'm front-end developer.
+          and I'm a front-end developer.
         </h2>
         <div class="heroButtons">
           <Button color="primary" variant="ghost" link href="/projects">Projects</Button>
