@@ -47,6 +47,9 @@ main{
   max-width: 960px;
   margin: 0 auto;
   min-height: calc(100vh - 100px);
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
 }
 a{
   text-decoration: none;
